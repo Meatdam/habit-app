@@ -12,6 +12,7 @@ _____
 - Celery;
 - Django-filter;
 - Swagger;
+- redoc;
 - django-celery-beat;
 - drf-yasg;
 - CORS;
