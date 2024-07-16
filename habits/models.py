@@ -6,6 +6,9 @@ NULLABLE = {'blank': True, 'null': True}
 
 
 class Habits(models.Model):
+    """
+    Модель привычки
+    """
     PERIOD_CHOICES = (
         (True, 'Ежедневная'),
         (False, 'Еженедельная'),
