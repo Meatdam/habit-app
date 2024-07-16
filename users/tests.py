@@ -13,6 +13,9 @@ class TestUser(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_create_user(self):
+        """
+        Тест на создание пользователя
+        """
 
         data = {
             "email": "test@example.com",
@@ -43,6 +46,9 @@ class TestUser(APITestCase):
         self.assertTrue(User.objects.all().count() == 2)
 
     def test_update_user(self):
+        """
+        Тест на изменение пользователя
+        """
         data = {
             "email": "test@example.com",
             "password": 1234,
