@@ -8,7 +8,7 @@ from users.models import User
 
 class HabitsTestCase(APITestCase):
     """
-    Тестирование создания, изменения и получения урока
+    Тестирование создания, изменения и получения привычки
     """
     def setUp(self):
         self.user = User.objects.create(email="test@mail.ru")
@@ -16,6 +16,9 @@ class HabitsTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_habits_create(self):
+        """
+        Тест создания привычки
+        """
         url = reverse('habits:habits_create')
         data = {
             "owner": self.user.pk,
@@ -31,6 +34,9 @@ class HabitsTestCase(APITestCase):
         self.assertTrue(Habits.objects.all().count(), 2)
 
     def test_habits_update(self):
+        """
+        Тест изменения привычки
+        """
         url = reverse('habits:habits_update', args=(self.habit.pk,))
         data = {
             "owner": self.user.pk,
@@ -45,6 +51,9 @@ class HabitsTestCase(APITestCase):
         self.assertEqual(data.get('place', 'time',), 'test2', '12:00')
 
     def test_habits_retrieve(self):
+        """
+        Тест получения одной привычки
+        """
         url = reverse('habits:habits_detail', args=(self.habit.pk,))
         response = self.client.get(url)
         data = response.json()
@@ -52,12 +61,18 @@ class HabitsTestCase(APITestCase):
         self.assertEqual(data.get('place', 'time'), 'улица', '12:00')
 
     def test_habit_delete(self):
+        """
+        Тест удаления привычки
+        """
         url = reverse('habits:habits_delete', args=(self.habit.pk,))
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Habits.objects.all().count(), 0)
 
     def test_habits_list(self):
+        """
+        Тест получения списка привычек
+        """
         url = reverse('habits:habits_list')
         response = self.client.get(url)
         data = response.json()
@@ -80,6 +95,9 @@ class HabitsTestCase(APITestCase):
         self.assertEqual(data, result)
 
     def test_habits_public_list(self):
+        """
+        Тест получения публичного списка привычеек
+        """
         url = reverse('habits:public_list')
         response = self.client.get(url)
         data = response.json()

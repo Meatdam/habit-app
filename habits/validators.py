@@ -2,6 +2,11 @@ from rest_framework import serializers
 
 
 class HabitsValidatorRelated:
+    """
+    Проверка связяных привычек,
+    связывать приятную привычку запрещено,
+    Приятная привычка не может быть связана с другой привычкой
+    """
     def __init__(self, field, field2):
         self.field = field
         self.field2 = field2
@@ -19,6 +24,10 @@ class HabitsValidatorRelated:
 
 
 class ValidatorPrize:
+    """
+    Проверка наличия награды,
+    Награда не может быть установлена для приятной привычки
+    """
     def __init__(self, field, field2):
         self.field = field
         self.field2 = field2
@@ -33,6 +42,10 @@ class ValidatorPrize:
 
 
 class ValidatorDuration:
+    """
+    Проверка длительности привычки,
+    Длительность выполнения не может быть больше двух минут
+    """
     def __init__(self, field):
         self.field = field
 
@@ -46,7 +59,10 @@ class ValidatorDuration:
 
 
 class ValidatorRelated:
-
+    """
+    Проверка связи привычек с наградой,
+    Связанная привычка не может быть с вознаграждением
+    """
     def __init__(self, field, field2):
         self.field = field
         self.field2 = field2
