@@ -29,7 +29,7 @@ _____
 Для запуска проекта у себя локально необходимо:
 1. git clone репозитория
 ```
-git@github.com:Meatdam/online_traning_LMS_system.git
+git@github.com:Meatdam/habit-app.git
 ```
 2. Установить виртуальное окружение `venv`
 ```
@@ -46,3 +46,15 @@ venv\Scripts\activate.bat для windows
 pip install -r requirements.txt
 ```
 4. Создать базу данных в ```PgAdmin```, либо через терминал. Необходимо дать название в файле settings.py в каталоге 'base' в константе (словаре) 'DATABASES'
+5. Заполнить своими данными файл .env в корне вашего проекта. Образец файла лежит в корне .env.example
+6. Для запуска проекта использовать команду
+```
+python manage.py ruserver
+```
+7. Для запуска celery work и celery beat используйте команду
+```
+-A base worker --beat --scheduler django --loglevel=info
+
+```
+## Важно
+### Чтобы приложение работало хорошо, сравните свой часово пояс с текущим в приложение, если он не совпадает поменяйте его на свой, в приложение base/settings UTC
