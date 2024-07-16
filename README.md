@@ -27,4 +27,22 @@ _____
 Так же пользователь может выбрать в качестве награды, кастомную(свою личную привычку в поле 'prize') либо сослаться на приятную привычку (если ее создать. Поле 'related' - ID приятной привычки).<br>
 _____
 Для запуска проекта у себя локально необходимо:
-1 
+1. git clone репозитория
+```
+git@github.com:Meatdam/online_traning_LMS_system.git
+```
+2. Установить виртуальное окружение `venv`
+```
+python3 -m venv venv для MacOS и Linux систем
+python -m venv venv для windows
+```
+3. Активировать виртуальное окружение
+```
+source venv/bin/activate для MasOs и Linux систем
+venv\Scripts\activate.bat для windows
+```
+4. установить файл с зависимостями
+```
+pip install -r requirements.txt
+```
+4. Создать базу данных в ```PgAdmin```, либо через терминал. Необходимо дать название в файле settings.py в каталоге 'base' в константе (словаре) 'DATABASES'
