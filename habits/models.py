@@ -35,6 +35,7 @@ class Habits(models.Model):
     related = models.ForeignKey('self', on_delete=models.SET_NULL, verbose_name='Связанная с другой привычкой',
                                 **NULLABLE)
     prize = models.CharField(max_length=100, verbose_name='Награда', **NULLABLE)
+    mailing_sign = models.BooleanField(default=True, verbose_name='Признак рассылки', **NULLABLE)
 
     def __str__(self):
         return f'{self.action} в {self.time} в {self.place}'
