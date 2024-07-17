@@ -17,6 +17,7 @@ def send_habit():
 
     for habit in habits:
         result_time = habit.time + datetime.timedelta(hours=UTC_HOUR)
+        time_week = result_time + datetime.timedelta(days=7)
         if (current_date == result_time.strftime("%Y-%m-%d %H:%M") and habit.is_daily is True
                 and habit.mailing_sign is True and habit.time.day <= current_date_1.day + 7):
 
@@ -40,7 +41,8 @@ def send_habit():
                 message = (f"Не забудь {habit.action} в {habit.time}' место: '{habit.place}'. И получи приз: "
                            f"'{habit.prize}'")
             send_telegram_message(tg_chat, message)
-        elif habit.mailing_sign is False and habit.time.day + 7 == current_date_1.day:
+        elif (habit.mailing_sign is False and habit.is_daily is False and time_week.strftime("%Y-%m-%d %H:%M") ==
+              current_date):
             habit.mailing_sign = True
             habit.save()
             tg_chat = habit.owner.tg_chat_id
@@ -52,3 +54,4 @@ def send_habit():
                            f"'{habit.prize}'")
             send_telegram_message(tg_chat, message)
             habit.mailing_sign = False
+            habit.save()
