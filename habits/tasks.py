@@ -40,3 +40,15 @@ def send_habit():
                 message = (f"Не забудь {habit.action} в {habit.time}' место: '{habit.place}'. И получи приз: "
                            f"'{habit.prize}'")
             send_telegram_message(tg_chat, message)
+        elif habit.mailing_sign is False and habit.time.day + 7 == current_date_1.day:
+            habit.mailing_sign = True
+            habit.save()
+            tg_chat = habit.owner.tg_chat_id
+            if habit.prize is None:
+                message = (f"Не забудь {habit.action} в {habit.time}' место: '{habit.place}'. И получи приз: "
+                           f"'Твое хорошее настроение'")
+            else:
+                message = (f"Не забудь {habit.action} в {habit.time}' место: '{habit.place}'. И получи приз: "
+                           f"'{habit.prize}'")
+            send_telegram_message(tg_chat, message)
+            habit.mailing_sign = False
