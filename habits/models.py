@@ -25,7 +25,7 @@ class Habits(models.Model):
     )
     owner = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь', **NULLABLE)
     place = models.CharField(max_length=100, verbose_name='Место')
-    time = models.TimeField(max_length=25, verbose_name='Время, когда надо выполнить привычку')
+    time = models.DateTimeField(max_length=25, verbose_name='Время, когда надо выполнить привычку')
     action = models.CharField(max_length=100, verbose_name='Действие, которое надо сделать')
     duration = models.SmallIntegerField(verbose_name='Продолжительность в минутах')
     is_daily = models.BooleanField(default=True, choices=PERIOD_CHOICES, verbose_name='Периодичность',
