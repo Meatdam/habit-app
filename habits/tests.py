@@ -12,7 +12,8 @@ class HabitsTestCase(APITestCase):
     """
     def setUp(self):
         self.user = User.objects.create(email="test@mail.ru")
-        self.habit = Habits.objects.create(owner=self.user, place="улица", time="20:00", action="test", duration=2)
+        self.habit = Habits.objects.create(owner=self.user, place="улица", time="2024-07-11 10:19", action="test",
+                                           duration=2)
         self.client.force_authenticate(user=self.user)
 
     def test_habits_create(self):
@@ -23,14 +24,14 @@ class HabitsTestCase(APITestCase):
         data = {
             "owner": self.user.pk,
             "place": "test",
-            "time": "10:00",
+            "time": "2024-07-11 10:00",
             "action": "test",
             "duration": 2,
 
         }
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(data.get('place', 'time'), "test", "test_2")
+        self.assertEqual(data.get('place', 'time'), 'test', '2024-07-11 10:00')
         self.assertTrue(Habits.objects.all().count(), 2)
 
     def test_habits_update(self):
@@ -41,14 +42,14 @@ class HabitsTestCase(APITestCase):
         data = {
             "owner": self.user.pk,
             "place": "test2",
-            "time": "12:00",
+            "time": "2024-07-11 12:00",
             "action": "test",
             "duration": 2,
 
         }
         response = self.client.patch(url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(data.get('place', 'time',), 'test2', '12:00')
+        self.assertEqual(data.get('place', 'time',), 'test2', '2024-07-11 12:00')
 
     def test_habits_retrieve(self):
         """
@@ -58,7 +59,7 @@ class HabitsTestCase(APITestCase):
         response = self.client.get(url)
         data = response.json()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(data.get('place', 'time'), 'улица', '12:00')
+        self.assertEqual(data.get('place', 'time'), 'улица', '2024-07-11 12:00')
 
     def test_habit_delete(self):
         """
@@ -88,6 +89,7 @@ class HabitsTestCase(APITestCase):
                                'is_good': True,
                                'is_public': True,
                                'prize': None,
+                               'mailing_sign': response.json()['results'][0]['mailing_sign'],
                                'owner': response.json()['results'][0]['owner'],
                                'related': None}]}
 
@@ -112,6 +114,7 @@ class HabitsTestCase(APITestCase):
                                'is_daily': True,
                                'is_good': True,
                                'is_public': True,
+                               'mailing_sign': response.json()['results'][0]['mailing_sign'],
                                'prize': None,
                                'owner': response.json()['results'][0]['owner'],
                                'related': None}]}
