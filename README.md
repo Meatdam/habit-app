@@ -158,6 +158,7 @@ apt install docker docker-compose
 ```
 docker compose up -d --build
 ```
+____
 Подключение CI/CD
 1. Регестрируемся на GitLab
 2. Клонируем проект себе в GitLab используя SSH ключ
