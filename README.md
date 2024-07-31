@@ -143,6 +143,10 @@ server {
 ```
 ln -s /etc/nginx/sites-available/my_site /etc/nginx/sites-enabled
 ```
+11. Выполнить команду для определение статики проекта
+```
+python3 manage.py collectstatic
+```
 _____
 Деплой приложения череез Docker на удаленный сервер
 1. Выполнить шаги 1,3,5,6,7,8
