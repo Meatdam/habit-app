@@ -154,10 +154,13 @@ _____
 ```
 apt install docker docker-compose
 ```
-python3 manage.py collectstatic
+3. Выполнить команду
+```
+docker compose up -d --build
+```
 Подключение CI/CD
 1. Регестрируемся на GitLab
-2. Клонируем проект себе в GitLab используя SSH ключь
+2. Клонируем проект себе в GitLab используя SSH ключ
 ```
 git@github.com:Meatdam/habit-app.git
 ```
