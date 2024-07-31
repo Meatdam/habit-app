@@ -74,7 +74,7 @@ _____
 docker-compose down 
 ```
 _____
-Деплой приложения на удаленный сервер.<br>
+Деплой приложения на удаленный сервер в ручном режиме.<br>
 1. Необходимо установить зависимости на удаленный сервер
 ```
 sudo apt-get update
@@ -143,11 +143,26 @@ server {
 ```
 ln -s /etc/nginx/sites-available/my_site /etc/nginx/sites-enabled
 ```
+_____
+Деплой приложения череез Docker на удаленный сервер
+1. Выполнить шаги 1,3,5,6,7,8
+2. Установить docker и docker-compose на удаленный сервер
+```
+apt install docker docker-compose
+```
+python3 manage.py collectstatic
 Подключение CI/CD
 1. Регестрируемся на GitLab
 2. Клонируем проект себе в GitLab используя SSH ключь
 ```
-
+git@github.com:Meatdam/habit-app.git
+```
+3. В разделе settings -> CI/CD -> Runners создаем runner
+4. В разделе settings -> CI/CD -> Variables создаем env файл для взаимодействия с проектом
+5. Выполнить установку у себя на удаленном сервере
+```
+curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash
+sudo -E apt-get install gitlab-runner
 ```
 ## Важно
 ### Чтобы приложение работало хорошо, сравните свой часово пояс с текущим в приложение, если он не совпадает поменяйте его на свой, в приложение base/settings UTC
